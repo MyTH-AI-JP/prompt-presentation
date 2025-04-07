@@ -12,12 +12,7 @@ const nextConfig = {
   reactStrictMode: true,
   
   // 出力ターゲット
-  output: 'standalone',
-  
-  // パスの設定
-  experimental: {
-    appDir: true
-  }
+  output: 'standalone'
 };
 
 module.exports = nextConfig;

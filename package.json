@@ -2,7 +2,7 @@
   "name": "prompt-presentation",
   "version": "1.0.0",
   "description": "プロンプトからPPT風資料を生成するWebアプリ",
-  "main": "index.js",
+  "main": "app/page.js",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
