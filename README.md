@@ -53,6 +53,120 @@ npm run dev
 NEXT_PUBLIC_API_BASE_URL=http://localhost:3000
 ```
 
+## Vercelデプロイ設定
+
+このアプリケーションはVercelにデプロイされており、以下のURLでアクセスできます：
+
+- 公開URL: [https://prompt-presentation-nu.vercel.app/](https://prompt-presentation-nu.vercel.app/)
+
+### タイムアウト設定
+
+Vercelのサーバーレス関数は、デフォルトでは短いタイムアウト制限があります。AI生成のような時間のかかる処理では、以下のようにタイムアウト設定を調整する必要があります：
+
+1. Vercelダッシュボードの「Settings」→「Functions」で「Function Execution Timeout」を55秒に設定
+2. または、`vercel.json`ファイルで以下のように設定：
+
+```json
+{
+  "functions": {
+    "api/generate-presentation.js": {
+      "maxDuration": 55
+    }
+  }
+}
+```
+
+**注意**: タイムアウト設定はVercelのプランによって制限があります（無料プラン: 10秒、Pro/Teamプラン: 60秒、Enterpriseプラン: 900秒）。
+
+## APIテスト結果
+
+公開環境でのCurl APIテストの結果概要です。
+
+### APIエンドポイント
+
+```
+POST https://prompt-presentation-nu.vercel.app/api/generate-presentation
+```
+
+### リクエスト形式
+
+```json
+{
+  "prompt": "生成するスライドのテーマ",
+  "apiKey": "YOUR_API_KEY",
+  "provider": "openai|gemini",
+  "numSlides": 数値（3-10）,
+  "theme": "modern|dark|gradient|minimal"
+}
+```
+
+### テスト結果
+
+#### Gemini APIテスト
+
+**リクエスト例**:
+```bash
+curl -X POST https://prompt-presentation-nu.vercel.app/api/generate-presentation \
+  -H "Content-Type: application/json" \
+  -d '{
+    "prompt": "AIの未来について3枚のスライドを作成",
+    "apiKey": "YOUR_GEMINI_API_KEY",
+    "provider": "gemini",
+    "numSlides": 3,
+    "theme": "modern"
+  }'
+```
+
+**応答例**:
+```json
+{
+  "title": "AIの未来：可能性と課題",
+  "theme": "modern",
+  "slides": [
+    {
+      "title": "AIの未来：可能性と課題",
+      "content": "<div><p>AIは私たちの生活、仕事、社会を大きく変えようとしています。</p><p>このプレゼンテーションでは、AIの未来について、その可能性と課題を探ります。</p></div>",
+      "type": "title"
+    },
+    {
+      "title": "AIがもたらす未来",
+      "content": "<div><ul><li><b>自動化の進化：</b> 反復作業からの解放、生産性の向上</li><li><b>医療の革新：</b> 診断精度向上、個別化医療の実現</li><li><b>持続可能な社会：</b> エネルギー効率の最適化、環境問題の解決</li><li><b>新たな産業の創出：</b> AIを活用した新サービス、新ビジネスモデル</li></ul></div>",
+      "type": "content"
+    },
+    {
+      "title": "AIの課題と向き合う",
+      "content": "<div><ul><li><b>倫理的な問題：</b> AIの意思決定、バイアスの排除</li><li><b>雇用の変化：</b> スキルシフト、新たな雇用の創出</li><li><b>セキュリティリスク：</b> AIの悪用、プライバシー侵害</li><li><b>技術的な限界：</b> まだ発展途上の技術、予測不可能性</li><li><b>まとめ：</b> AIの未来は、私たちがどのように向き合うかにかかっています。可能性を最大限に活かし、課題を克服することで、より良い未来を創造できます。</li></ul></div>",
+      "type": "summary"
+    }
+  ]
+}
+```
+
+#### OpenAI APIテスト
+
+**リクエスト例**:
+```bash
+curl -X POST https://prompt-presentation-nu.vercel.app/api/generate-presentation \
+  -H "Content-Type: application/json" \
+  -d '{
+    "prompt": "AI技術入門",
+    "apiKey": "YOUR_OPENAI_API_KEY",
+    "provider": "openai",
+    "numSlides": 3,
+    "theme": "modern"
+  }'
+```
+
+**実行結果**:
+タイムアウト設定変更前は `FUNCTION_INVOCATION_TIMEOUT` エラーが発生することがありましたが、タイムアウト設定を55秒に変更後は正常に動作するようになりました。
+
+### 実行時間目安
+
+- Gemini API: 約2〜5秒
+- OpenAI API: 約5〜15秒
+
+**注意**: 実行時間はプロンプトの複雑さ、スライド数、APIの応答時間によって変動します。
+
 ## ライセンス
 
 [MIT License](LICENSE)
