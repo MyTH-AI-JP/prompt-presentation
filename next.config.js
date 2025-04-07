@@ -12,18 +12,7 @@ const nextConfig = {
   reactStrictMode: true,
   
   // 出力ターゲット
-  output: 'standalone',
-  
-  // Pagesディレクトリを無効化
-  pageExtensions: ['page.js', 'page.jsx', 'page.ts', 'page.tsx'],
-  
-  // 実験的機能の有効化
-  experimental: {
-    // App Routerを明示的に有効化
-    appDir: true,
-    // サーバーコンポーネントを有効化
-    serverComponents: true
-  }
+  output: 'standalone'
 };
 
 module.exports = nextConfig;
