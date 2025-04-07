@@ -69,7 +69,7 @@ const PresentationForm = ({ onGenerate, isLoading }) => {
               value={provider}
               onChange={(e) => setProvider(e.target.value)}
             >
-              <option value="openai">OpenAI (GPT-4)</option>
+              <option value="openai">o3-mini</option>
               <option value="gemini">Google Gemini</option>
             </select>
           </div>
