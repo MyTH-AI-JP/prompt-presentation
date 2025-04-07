@@ -1,4 +1,4 @@
-import { generateWithOpenAI, generateWithGemini } from '../../lib/utils/presentation-generator';
+import { generateWithOpenAI, generateWithGemini, generateWithClaude } from '../../lib/utils/presentation-generator';
 
 export default async function handler(req, res) {
   // CORSヘッダー追加
@@ -32,8 +32,10 @@ export default async function handler(req, res) {
       generatedPresentation = await generateWithOpenAI(prompt, apiKey, numSlides, theme);
     } else if (provider === 'gemini') {
       generatedPresentation = await generateWithGemini(prompt, apiKey, numSlides, theme);
+    } else if (provider === 'claude') {
+      generatedPresentation = await generateWithClaude(prompt, apiKey, numSlides, theme);
     } else {
-      return res.status(400).json({ error: '無効なプロバイダー。"openai"または"gemini"を指定してください' });
+      return res.status(400).json({ error: '無効なプロバイダー。"openai"、"gemini"、または"claude"を指定してください' });
     }
 
     return res.status(200).json(generatedPresentation);

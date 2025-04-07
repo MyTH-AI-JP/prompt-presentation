@@ -52,7 +52,13 @@ const PresentationForm = ({ onGenerate, isLoading }) => {
             className="form-input"
             value={apiKey}
             onChange={(e) => setApiKey(e.target.value)}
-            placeholder={provider === 'openai' ? 'OpenAI APIキー' : 'Gemini APIキー'}
+            placeholder={
+              provider === 'openai' 
+                ? 'OpenAI APIキー' 
+                : provider === 'gemini'
+                  ? 'Gemini APIキー'
+                  : 'Claude APIキー'
+            }
             required
           />
           <small>※このキーはサーバーに保存されません</small>
@@ -70,7 +76,8 @@ const PresentationForm = ({ onGenerate, isLoading }) => {
               onChange={(e) => setProvider(e.target.value)}
             >
               <option value="openai">gpt-4o</option>
-              <option value="gemini">Google Gemini</option>
+              <option value="gemini">Gemini 2.0 Flash</option>
+              <option value="claude">Claude 3.7 Sonnet</option>
             </select>
           </div>
           
@@ -88,6 +95,7 @@ const PresentationForm = ({ onGenerate, isLoading }) => {
               <option value="5">5枚</option>
               <option value="7">7枚</option>
               <option value="10">10枚</option>
+              <option value="15">15枚</option>
             </select>
           </div>
           

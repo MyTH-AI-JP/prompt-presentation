@@ -172,6 +172,43 @@ a:hover {
   justify-content: space-between;
   align-items: center;
   margin-bottom: 20px;
+  flex-wrap: wrap;
+  gap: 15px;
+}
+
+.presentation-title {
+  flex: 1;
+  min-width: 200px;
+}
+
+.presentation-actions {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.download-buttons {
+  display: flex;
+  gap: 10px;
+}
+
+.download-buttons .btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.9rem;
+  padding: 0.6rem 1rem;
+}
+
+.download-buttons .btn-secondary {
+  background-color: #f0f0f0;
+  border: 1px solid #ddd;
+  color: var(--text-color);
+}
+
+.download-buttons .btn-secondary:hover {
+  background-color: #e6e6e6;
 }
 
 .slide-controls {
@@ -198,6 +235,9 @@ a:hover {
   overflow: hidden;
   border-radius: 4px;
   margin-bottom: 20px;
+  max-width: 960px; /* 標準的なプレゼンテーションサイズ */
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .slide {
@@ -250,24 +290,24 @@ a:hover {
 
 /* スライドテーマ */
 .theme-modern {
-  background-color: white;
-  color: #333;
+  background: linear-gradient(to bottom, #ffffff, #f5f5f5) !important;
+  color: #333 !important;
 }
 
 .theme-dark {
-  background-color: #2d2d2d;
-  color: #ffffff;
+  background: #2d2d2d !important;
+  color: #fff !important;
 }
 
 .theme-gradient {
-  background: linear-gradient(135deg, #6e8efb, #a777e3);
-  color: white;
+  background: linear-gradient(135deg, #6e8efb, #a777e3) !important;
+  color: #fff !important;
 }
 
 .theme-minimal {
-  background-color: #f8f9fa;
-  color: #343a40;
-  border: 1px solid #dee2e6;
+  background: #f8f9fa !important;
+  color: #343a40 !important;
+  border: 1px solid #dee2e6 !important;
 }
 
 /* スライドタイプ */
@@ -415,4 +455,78 @@ a:hover {
 .return-link {
   display: inline-block;
   margin-top: 16px;
+}
+
+/* 全スライド表示と印刷関連スタイル */
+.all-slides-view {
+  width: 100%;
+}
+
+.all-slides-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+  padding: 10px;
+  background-color: var(--secondary-color);
+  border-radius: 4px;
+}
+
+.hidden {
+  display: none;
+}
+
+/* 印刷時のスタイル */
+@media print {
+  @page {
+    size: landscape;
+    margin: 10mm; /* 印刷時の余白を設定 */
+  }
+  
+  body * {
+    visibility: hidden;
+  }
+  
+  .print-container,
+  .print-container * {
+    visibility: visible;
+  }
+  
+  .print-container {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+  }
+  
+  .no-print {
+    display: none !important;
+  }
+  
+  .slide-container {
+    page-break-after: always;
+    page-break-inside: avoid;
+    height: 100vh;
+    width: 100%;
+    margin: 0 auto !important;
+    padding: 0 !important;
+    border: none !important;
+    box-shadow: none !important;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    max-width: none !important;
+  }
+  
+  /* 最後のスライドの後にページ区切りを入れない */
+  .print-container .slide-container:last-child {
+    page-break-after: auto;
+  }
+}
+
+/* スライド表示スタイル */
+.presentation-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
 } 
