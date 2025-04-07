@@ -1,4 +1,4 @@
-import React from 'react';
+import '../styles/globals.css';
 
 // これはApp Routerがあるため、実際には使用されません
 function MyApp({ Component, pageProps }) {
