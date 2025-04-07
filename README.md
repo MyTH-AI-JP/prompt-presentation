@@ -6,21 +6,32 @@
 
 ## 機能概要
 
-Prompt Presentation は、自然言語のプロンプトを入力するだけで、構造化されたプレゼンテーションスライドを自動生成するツールです。OpenAI API または Google Gemini API を利用して、高品質なプレゼン資料を短時間で作成できます。
+Prompt Presentation は、自然言語のプロンプトを入力するだけで、構造化されたプレゼンテーションスライドを自動生成するツールです。OpenAI API、Google Gemini API、または Anthropic Claude API を利用して、高品質なプレゼン資料を短時間で作成できます。
 
 主な機能:
 - テキストプロンプトからプレゼンテーションスライドを自動生成
-- OpenAI API または Google Gemini API を選択可能
+- OpenAI GPT-4o、Gemini 2.0 Flash、または Claude 3.7 Sonnet を選択可能
 - 様々なテーマとスタイルをカスタマイズ
-- プレゼンテーションのタイトル、説明、キーワードの設定
+- スライド数のカスタマイズ（3枚〜15枚）
+- プレゼンテーションのHTMLまたはPDFでのダウンロード
 - 生成されたスライドのプレビューと閲覧
+
+## 最新アップデート情報（2024年11月）
+
+### 2024年11月26日更新
+
+- **Claude 3.7 Sonnet対応**: Anthropic Claude 3.7 Sonnetモデルをサポート
+- **UI/UXの改善**: モデル名表示を「gpt-4o」「Gemini 2.0 Flash」「Claude 3.7 Sonnet」に統一
+- **スライド数オプションの拡張**: 15枚までのスライド生成をサポート
+- **PDF生成機能の最適化**: スライドサイズを16:9比率に最適化し、PDFで美しく表示
+- **不要機能の削除**: 印刷プレビュー機能を削除しシンプル化
 
 ## 技術スタック
 
 - **フロントエンド**: Next.js (App Router), React
 - **バックエンド**: Next.js API Routes
 - **デザイン**: CSS Modules, レスポンシブデザイン
-- **AI API**: OpenAI API, Google Gemini API
+- **AI API**: OpenAI API, Google Gemini API, Anthropic Claude API
 
 ## インストール方法
 
@@ -39,11 +50,12 @@ npm run dev
 ## 使用方法
 
 1. アプリにアクセス (デフォルトでは http://localhost:3000)
-2. OpenAI または Gemini の API キーを設定
-3. プレゼンテーションのタイトル、説明、キーワードを入力
-4. 生成したいスライドの内容を自然言語で記述
-5. 「生成」ボタンをクリック
+2. OpenAI、Gemini、またはClaudeのAPI キーを設定
+3. プレゼンテーションのテーマを入力
+4. AIプロバイダー、スライド数、テーマを選択
+5. 「プレゼンテーションを生成」ボタンをクリック
 6. 生成されたスライドを表示・閲覧
+7. 必要に応じてHTMLまたはPDFでダウンロード
 
 ## 環境変数
 
@@ -94,8 +106,8 @@ POST https://prompt-presentation-nu.vercel.app/api/generate-presentation
 {
   "prompt": "生成するスライドのテーマ",
   "apiKey": "YOUR_API_KEY",
-  "provider": "openai|gemini",
-  "numSlides": 数値（3-10）,
+  "provider": "openai|gemini|claude",
+  "numSlides": 数値（3-15）,
   "theme": "modern|dark|gradient|minimal"
 }
 ```
@@ -160,10 +172,29 @@ curl -X POST https://prompt-presentation-nu.vercel.app/api/generate-presentation
 **実行結果**:
 タイムアウト設定変更前は `FUNCTION_INVOCATION_TIMEOUT` エラーが発生することがありましたが、タイムアウト設定を55秒に変更後は正常に動作するようになりました。
 
+#### Claude APIテスト
+
+**リクエスト例**:
+```bash
+curl -X POST https://prompt-presentation-nu.vercel.app/api/generate-presentation \
+  -H "Content-Type: application/json" \
+  -d '{
+    "prompt": "宇宙探査の歴史と未来",
+    "apiKey": "YOUR_CLAUDE_API_KEY",
+    "provider": "claude",
+    "numSlides": 5,
+    "theme": "gradient"
+  }'
+```
+
+**実行結果**:
+Claude 3.7 Sonnetモデルを使用した高品質なプレゼンテーションが生成されます。
+
 ### 実行時間目安
 
 - Gemini API: 約2〜5秒
 - OpenAI API: 約5〜15秒
+- Claude API: 約5〜15秒
 
 **注意**: 実行時間はプロンプトの複雑さ、スライド数、APIの応答時間によって変動します。
 
