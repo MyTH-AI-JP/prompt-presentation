@@ -13,7 +13,8 @@ Prompt Presentation は、自然言語のプロンプトを入力するだけで
 - OpenAI GPT-4o、Gemini 2.0 Flash、または Claude 3.7 Sonnet を選択可能
 - 様々なテーマとスタイルをカスタマイズ
 - スライド数のカスタマイズ（3枚〜15枚）
-- プレゼンテーションのHTMLまたはPDFでのダウンロード
+- プレゼンテーションのHTML、PDF、PowerPointでのダウンロード
+- Googleスライドとの連携機能
 - 生成されたスライドのプレビューと閲覧
 
 ## 最新アップデート情報（2024年11月）
@@ -24,6 +25,8 @@ Prompt Presentation は、自然言語のプロンプトを入力するだけで
 - **UI/UXの改善**: モデル名表示を「gpt-4o」「Gemini 2.0 Flash」「Claude 3.7 Sonnet」に統一
 - **スライド数オプションの拡張**: 15枚までのスライド生成をサポート
 - **PDF生成機能の最適化**: スライドサイズを16:9比率に最適化し、PDFで美しく表示
+- **PowerPointダウンロード機能**: 生成したスライドをPowerPoint (.pptx) 形式でダウンロード可能に
+- **Googleスライド連携機能**: 生成したスライドをGoogleスライドで直接開いて編集可能に
 - **不要機能の削除**: 印刷プレビュー機能を削除しシンプル化
 
 ## 技術スタック
@@ -32,6 +35,7 @@ Prompt Presentation は、自然言語のプロンプトを入力するだけで
 - **バックエンド**: Next.js API Routes
 - **デザイン**: CSS Modules, レスポンシブデザイン
 - **AI API**: OpenAI API, Google Gemini API, Anthropic Claude API
+- **プレゼンテーション**: Google Slides API
 
 ## インストール方法
 
@@ -55,7 +59,7 @@ npm run dev
 4. AIプロバイダー、スライド数、テーマを選択
 5. 「プレゼンテーションを生成」ボタンをクリック
 6. 生成されたスライドを表示・閲覧
-7. 必要に応じてHTMLまたはPDFでダウンロード
+7. 必要に応じてHTML、PDF、PowerPointでダウンロードするか、Googleスライドとして開く
 
 ## 環境変数
 
@@ -63,7 +67,20 @@ npm run dev
 
 ```
 NEXT_PUBLIC_API_BASE_URL=http://localhost:3000
+NEXT_PUBLIC_GOOGLE_CLIENT_ID=YOUR_GOOGLE_CLIENT_ID
+NEXT_PUBLIC_GOOGLE_API_KEY=YOUR_GOOGLE_API_KEY
 ```
+
+### Google API設定
+
+Googleスライド機能を使用するには、Google Cloud ConsoleでAPI認証情報を設定する必要があります：
+
+1. [Google Cloud Console](https://console.cloud.google.com/)にアクセス
+2. 新しいプロジェクトを作成
+3. Google Slides APIとGoogle Drive APIを有効化
+4. OAuth同意画面を設定
+5. OAuthクライアントIDとAPIキーを作成
+6. 取得した認証情報を環境変数に設定
 
 ## Vercelデプロイ設定
 
@@ -197,6 +214,14 @@ Claude 3.7 Sonnetモデルを使用した高品質なプレゼンテーション
 - Claude API: 約5〜15秒
 
 **注意**: 実行時間はプロンプトの複雑さ、スライド数、APIの応答時間によって変動します。
+
+## 注意事項
+
+- このアプリケーションはOpenAI GPT-4、Google Gemini、Anthropic Claude APIを使用しています。これらのAPIには利用料金が発生します。
+- Googleスライドとの連携にはGoogleアカウントへのログインが必要です。
+- PDF出力は現状、基本的なスタイルのみ対応しています。
+- PowerPointダウンロードでは、複雑なレイアウトや詳細なスタイルが簡略化される場合があります。
+- APIの利用にはそれぞれのサービスの利用規約が適用されます。
 
 ## ライセンス
 

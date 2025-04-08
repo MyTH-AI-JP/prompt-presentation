@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
 /* グローバルスタイル */
 :root {
   --primary-color: #0070f3;
@@ -21,11 +23,13 @@
 
 html,
 body {
-  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
     Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
   line-height: 1.6;
   color: var(--text-color);
   background-color: var(--background-color);
+  padding: 0;
+  margin: 0;
 }
 
 a {
@@ -248,86 +252,83 @@ a:hover {
   height: 100%;
   display: flex;
   flex-direction: column;
-  padding: 40px;
-  box-sizing: border-box;
+  padding: 2rem;
+  overflow: auto;
 }
 
 .slide-title {
-  font-size: 2.5rem;
-  font-weight: bold;
-  margin-bottom: 20px;
-  text-align: center;
+  margin-bottom: 1.5rem;
+  font-size: 2em;
+  color: inherit;
+  position: relative;
 }
 
 .slide-content {
   flex: 1;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
+  overflow-y: auto;
 }
 
 .slide-content p {
-  margin-bottom: 15px;
-  font-size: 1.2rem;
+  margin-bottom: 1rem;
+  font-size: 1.1em;
 }
 
 .slide-content ul, .slide-content ol {
-  margin-bottom: 15px;
-  padding-left: 25px;
+  margin-left: 1.5rem;
+  margin-bottom: 1rem;
 }
 
 .slide-content li {
-  margin-bottom: 10px;
-  font-size: 1.2rem;
+  margin-bottom: 0.5rem;
+  font-size: 1.1em;
 }
 
 .slide-footer {
-  font-size: 0.9rem;
-  color: var(--light-text);
+  font-size: 0.9em;
   text-align: right;
-  margin-top: 20px;
+  margin-top: auto;
+  padding-top: 1rem;
+  color: var(--light-text);
 }
 
-/* スライドテーマ */
+/* テーマスタイル */
 .theme-modern {
-  background: linear-gradient(to bottom, #ffffff, #f5f5f5) !important;
-  color: #333 !important;
+  background: linear-gradient(to bottom, #ffffff, #f5f5f5);
+  color: #333;
 }
 
 .theme-dark {
-  background: #2d2d2d !important;
-  color: #fff !important;
+  background: #2d2d2d;
+  color: #fff;
 }
 
 .theme-gradient {
-  background: linear-gradient(135deg, #6e8efb, #a777e3) !important;
-  color: #fff !important;
+  background: linear-gradient(135deg, #6e8efb, #a777e3);
+  color: #fff;
 }
 
 .theme-minimal {
-  background: #f8f9fa !important;
-  color: #343a40 !important;
-  border: 1px solid #dee2e6 !important;
+  background: #f8f9fa;
+  color: #343a40;
+  border: 1px solid #dee2e6;
 }
 
-/* スライドタイプ */
+/* スライドタイプスタイル */
 .slide-type-title {
   justify-content: center;
-  align-items: center;
-  text-align: center;
 }
 
 .slide-type-title .slide-title {
-  font-size: 3rem;
+  font-size: 2.5em;
 }
 
 .slide-type-title .slide-subtitle {
-  font-size: 1.5rem;
-  margin-top: 20px;
+  font-size: 1.5em;
+  color: var(--light-text);
 }
 
 .slide-type-content {
-  justify-content: flex-start;
+  align-items: flex-start;
 }
 
 .slide-type-split {
@@ -337,29 +338,29 @@ a:hover {
 .slide-type-split .split-left,
 .slide-type-split .split-right {
   flex: 1;
-  padding: 10px;
+  padding: 1rem;
 }
 
-/* レスポンシブ設定 */
+/* レスポンシブスタイル */
 @media (max-width: 768px) {
   .slide {
-    padding: 20px;
+    padding: 1.5rem;
   }
-  
+
   .slide-title {
-    font-size: 1.8rem;
+    font-size: 1.8em;
   }
-  
+
   .slide-content p, .slide-content li {
-    font-size: 1rem;
+    font-size: 1em;
   }
   
   .slide-type-title .slide-title {
-    font-size: 2rem;
+    font-size: 2em;
   }
   
   .slide-type-title .slide-subtitle {
-    font-size: 1.2rem;
+    font-size: 1.2em;
   }
   
   .slide-type-split {
@@ -367,21 +368,21 @@ a:hover {
   }
 }
 
-/* ローディングインジケータ */
+/* ローディングスタイル */
 .loading {
   display: flex;
-  justify-content: center;
-  align-items: center;
   flex-direction: column;
-  height: 300px;
+  align-items: center;
+  justify-content: center;
+  height: 200px;
 }
 
 .spinner {
   border: 4px solid rgba(0, 0, 0, 0.1);
-  width: 36px;
-  height: 36px;
   border-radius: 50%;
-  border-left-color: var(--primary-color);
+  border-top: 4px solid var(--primary-color);
+  width: 40px;
+  height: 40px;
   animation: spin 1s linear infinite;
 }
 
@@ -395,69 +396,67 @@ a:hover {
 }
 
 .loading-text {
-  margin-top: 16px;
-  font-size: 1.2rem;
+  margin-top: 1rem;
+  font-size: 1.2em;
+  color: var(--text-color);
 }
 
-/* エラー表示 */
+/* エラーページスタイル */
 .error-container {
-  padding: 16px;
-  border-radius: 4px;
-  background-color: #ffebee;
-  border: 1px solid #ffcdd2;
-  color: #b71c1c;
-  margin: 20px 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 60vh;
+  text-align: center;
 }
 
 .error-page {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  min-height: 80vh;
+  max-width: 600px;
+  padding: 2rem;
 }
 
 .error-content {
   background-color: white;
+  padding: 2rem;
   border-radius: 8px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-  padding: 40px;
+  box-shadow: var(--card-shadow);
   text-align: center;
-  max-width: 600px;
 }
 
 .error-icon {
-  font-size: 64px;
+  font-size: 3em;
   color: var(--error-color);
-  margin-bottom: 24px;
+  margin-bottom: 1rem;
 }
 
 .error-title {
-  font-size: 2rem;
-  margin-bottom: 16px;
+  font-size: 1.5em;
+  margin-bottom: 1rem;
   color: var(--error-color);
 }
 
 .error-message {
-  margin-bottom: 24px;
-  font-size: 1.1rem;
+  margin-bottom: 1.5rem;
 }
 
 .error-details {
-  background-color: #f5f5f5;
-  padding: 16px;
+  background-color: #f8f9fa;
+  padding: 1rem;
   border-radius: 4px;
-  text-align: left;
-  margin-bottom: 24px;
   font-family: monospace;
+  text-align: left;
+  margin-bottom: 1.5rem;
   overflow-x: auto;
+  white-space: pre-wrap;
 }
 
 .return-link {
   display: inline-block;
-  margin-top: 16px;
+  margin-top: 1rem;
 }
 
-/* 全スライド表示と印刷関連スタイル */
+/* 全スライド表示モード */
 .all-slides-view {
   width: 100%;
 }
@@ -466,21 +465,19 @@ a:hover {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 20px;
-  padding: 10px;
-  background-color: var(--secondary-color);
-  border-radius: 4px;
+  margin-bottom: 2rem;
 }
 
+/* 非表示要素 */
 .hidden {
-  display: none;
+  display: none !important;
 }
 
-/* 印刷時のスタイル */
+/* 印刷スタイル */
 @media print {
   @page {
     size: landscape;
-    margin: 10mm; /* 印刷時の余白を設定 */
+    margin: 0;
   }
   
   body * {
@@ -504,29 +501,30 @@ a:hover {
   }
   
   .slide-container {
-    page-break-after: always;
-    page-break-inside: avoid;
-    height: 100vh;
-    width: 100%;
-    margin: 0 auto !important;
+    width: 100vw !important;
+    height: 100vh !important;
     padding: 0 !important;
-    border: none !important;
+    margin: 0 !important;
     box-shadow: none !important;
+    page-break-after: always;
+    box-sizing: border-box;
     display: flex;
     flex-direction: column;
     justify-content: center;
-    max-width: none !important;
+    border: none !important;
   }
   
-  /* 最後のスライドの後にページ区切りを入れない */
   .print-container .slide-container:last-child {
     page-break-after: auto;
   }
 }
 
-/* スライド表示スタイル */
 .presentation-container {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 20px;
+  position: relative;
+}
+
+.print-slide {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
 } 
